@@ -1,0 +1,4 @@
+schema.sql
+users-data.sql
+*.sql
+.env.deploy

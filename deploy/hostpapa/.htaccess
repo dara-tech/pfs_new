@@ -1,0 +1,35 @@
+# PSF on psfnew.nchads.gov.kh — /api → psf-api.php → local Node :3000
+
+<IfModule mod_headers.c>
+  <FilesMatch "^(index\.html|sw\.js|manifest\.webmanifest|registerSW\.js)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>
+
+# Legacy PWA artifacts — do not serve (force browser to use fresh index + chunks)
+<IfModule mod_rewrite.c>
+  RewriteRule ^(manifest\.webmanifest|registerSW\.js|workbox-.*\.js)$ - [R=404,L]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Pass Authorization header to PHP (required for JWT on POST via psf-api.php)
+  RewriteCond %{HTTP:Authorization} .
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+  # GET /api/* works via rewrite; POST must use /psf-api.php?p= (see frontend api.js)
+  RewriteRule ^api/?(.*)$ psf-api.php?p=$1 [L,QSA]
+
+  # Missing static files must 404 — not index.html (breaks module script MIME checks)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} ^/(assets|icons)/ [NC]
+  RewriteRule ^ - [R=404,L]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>

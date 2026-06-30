@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="PSF Health Survey and Reporting System" />
+    <meta name="psf-build" content="__PSF_BUILD__" />
+    <title>PSF Reporting System</title>
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('ui-storage');
+          if (!raw) return;
+          var parsed = JSON.parse(raw);
+          var locale = parsed.state && parsed.state.locale;
+          if (locale) document.documentElement.lang = locale;
+          var path = location.pathname || '';
+          if (/\/(client|provider)(\/|$)/.test(path) && /\/(kh)(\/|$)/.test(path)) {
+            document.documentElement.lang = 'kh';
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script>
+      (function () {
+        var BUILD = '__PSF_BUILD__';
+        var prev = sessionStorage.getItem('psf-build');
+        function unregisterAll() {
+          if (!('serviceWorker' in navigator)) return Promise.resolve();
+          return navigator.serviceWorker.getRegistrations().then(function (regs) {
+            return Promise.all(regs.map(function (r) { return r.unregister(); }));
+          });
+        }
+        function clearCaches() {
+          if (!window.caches || !caches.keys) return Promise.resolve();
+          return caches.keys().then(function (keys) {
+            return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+          });
+        }
+        Promise.all([unregisterAll(), clearCaches()]).then(function () {
+          sessionStorage.setItem('psf-build', BUILD);
+          if (prev && prev !== BUILD) {
+            var url = new URL(window.location.href);
+            url.searchParams.set('_', BUILD);
+            window.location.replace(url.toString());
+          }
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

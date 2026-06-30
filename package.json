@@ -1,0 +1,21 @@
+{
+  "name": "psf-v4-report",
+  "version": "2.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "build": "npm run build --workspace=frontend",
+    "start": "npm run start --workspace=backend",
+    "deploy": "./deploy.sh production",
+    "deploy:backend": "./deploy.sh windows",
+    "deploy:frontend": "./deploy.sh windows-frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
+

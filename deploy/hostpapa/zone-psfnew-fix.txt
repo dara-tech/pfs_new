@@ -1,0 +1,11 @@
+# Paste into cPanel → Zone Editor → nchads.gov.kh → Manage → Edit
+# DELETE every line that starts with "psfnew" (A, TXT, CNAME), then add ONE line below.
+
+# Remove lines like these if present:
+# psfnew  14400  IN  A  216.7.89.248
+# psfnew  14400  IN  A  76.76.21.21
+# psfnew  14400  IN  TXT  "v=spf1 ..."
+# psfnew  ...    IN  CNAME  5bad525f5025e224.vercel-dns-017.com.
+
+# Keep exactly ONE line (Vercel A record — no CNAME, no TXT on psfnew):
+psfnew  300  IN  A  76.76.21.21
