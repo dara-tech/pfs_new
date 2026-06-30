@@ -1,5 +1,7 @@
 # Auto-Deploy Guide
 
+> **Production (Windows / NCHADS):** see **[deploy/windows/PRODUCTION_SETUP.md](deploy/windows/PRODUCTION_SETUP.md)** for the full architecture, pfSense HAProxy, DNS cutover, and `npm run deploy` workflow. Live URL: https://psfnew.nchads.gov.kh
+
 This guide explains how to automatically deploy the PSF backend and frontend to your VPS.
 
 ## Quick Deploy (Local Script)

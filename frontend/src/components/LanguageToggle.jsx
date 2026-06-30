@@ -9,7 +9,7 @@ const FLAGS = {
   kh: { src: flagKh, alt: 'Khmer' },
 };
 
-export default function LanguageToggle() {
+export default function LanguageToggle({ className, flagClassName }) {
   const { locale, setLocale } = useUIStore();
   const isKh = locale === 'kh';
   const current = FLAGS[locale] || FLAGS.en;
@@ -20,14 +20,18 @@ export default function LanguageToggle() {
       onClick={() => setLocale(isKh ? 'en' : 'kh')}
       className={cn(
         'h-10 w-12 p-0 bg-background/80 transition-all duration-200',
-        'hover:bg-muted/80'
+        'hover:bg-muted/80',
+        className
       )}
       aria-label={isKh ? 'Switch to English' : 'Switch to Khmer'}
     >
       <img
         src={current.src}
         alt={current.alt}
-        className="h-6 w-9 rounded-[3px] object-cover shadow-sm border border-border/30"
+        className={cn(
+          'h-6 w-9 rounded-[3px] object-cover shadow-sm border border-border/30',
+          flagClassName
+        )}
         draggable={false}
       />
     </Button>

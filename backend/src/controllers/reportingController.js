@@ -433,7 +433,7 @@ export const getReportingTable = async (req, res) => {
       replacements.sites = filterSites.map(s => String(s).trim().toUpperCase());
     }
     
-    query += ` ORDER BY COALESCE(start, START) ASC`;
+    query += ` ORDER BY COALESCE(start, START) DESC`;
     
     let data = [];
     try {
@@ -467,7 +467,7 @@ export const getReportingTable = async (req, res) => {
             simpleReplacements.sites = filterSites.map(s => String(s).trim().toUpperCase());
           }
           
-          simpleQuery += ` ORDER BY start ASC`;
+          simpleQuery += ` ORDER BY start DESC`;
           
           data = await sequelize.query(simpleQuery, {
             replacements: simpleReplacements,

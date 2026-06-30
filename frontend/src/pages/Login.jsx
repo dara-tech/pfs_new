@@ -120,14 +120,14 @@ export default function Login() {
     >
       {/* Top bar — language + theme */}
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between gap-2 px-3 pt-safe sm:px-6 pointer-events-none">
-        <div className="pointer-events-auto rounded-full border border-border/60 bg-background/90 p-0.5 shadow-sm backdrop-blur-sm">
-          <LanguageToggle />
+        <div className="pointer-events-auto ">
+          <LanguageToggle className="rounded-none" flagClassName="rounded-none" />
         </div>
         <Button
           variant="ghost"
           size="icon"
           onClick={toggleTheme}
-          className="pointer-events-auto h-9 w-9 rounded-full border border-border/60 bg-background/90 shadow-sm backdrop-blur-sm hover:bg-muted"
+          className="pointer-events-auto h-9 w-9 "
           title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
         >
           {theme === 'light' ? <FaMoon className="h-4 w-4" /> : <FaSun className="h-4 w-4" />}

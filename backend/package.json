@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch src/app.js",
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "seed:admin": "node seed-admin.js",
+    "db:check": "node -e \"import('./src/config/database.js').then(async ({sequelize})=>{await sequelize.authenticate();console.log('OK:',process.env.DB_DATABASE,'@',process.env.DB_HOST+':'+process.env.DB_PORT);process.exit(0)}).catch(e=>{console.error('DB failed:',e.message);process.exit(1)})\""
   },
   "dependencies": {
     "@google-cloud/text-to-speech": "^6.4.0",

@@ -10,6 +10,7 @@
     "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
     "build": "npm run build --workspace=frontend",
     "start": "npm run start --workspace=backend",
+    "db:tunnel": "./scripts/remote-db-tunnel.sh",
     "deploy": "./deploy.sh production",
     "deploy:backend": "./deploy.sh windows",
     "deploy:frontend": "./deploy.sh windows-frontend"
