@@ -91,6 +91,14 @@ npm run deploy
 SKIP_VERIFY=1 ./deploy.sh production  # skip curl check
 ```
 
+## GitHub Actions (push → auto-deploy)
+
+On push to **`main`**, GitHub deploys automatically when `backend/`, `frontend/`, or `deploy/` files change.
+
+**Setup:** add secrets `WIN_SSH_HOST`, `WIN_SSH_PORT`, `WIN_SSH_USER`, `WIN_SSH_PASS` in the repo (see [GITHUB_ACTIONS.md](GITHUB_ACTIONS.md)).
+
+ngrok SSH on the Windows server must be running when the workflow runs.
+
 Backend-only manual steps (first-time setup) — edit `C:\psf-api\.env` on the server:
 
 - `DB_PASSWORD` — XAMPP MySQL root password
