@@ -24,6 +24,9 @@ deploy/**/.env.deploy
 # Cloud / service credentials
 backend/photoai-*.json
 **/photoai-*.json
+
+__pycache__/
+*.pyc
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
